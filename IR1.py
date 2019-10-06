@@ -201,6 +201,7 @@ def Merge_and_or(term1, term2, term3):
 
 
 def Merge_or_and(term1, term2, term3):
+
     Answer = []
 
     Answer = merge_or(term1, term2)
@@ -243,6 +244,7 @@ def Merge_or_and(term1, term2, term3):
 
 
 def NaiveSearch(terms):
+
     Answer = defaultdict(dict)
 
     for item in terms:
@@ -284,21 +286,17 @@ def token(doc):
 def tokenize_tweet(document):
     document = document.lower()
     uselessTerm = ["username","clusterno" ,"tweetid","errorcode","text","timestr"]
-    #a = document.index("username")
 
     a = document.index(uselessTerm[0])
 
-    #b = document.index("clusterno")
-
     b = document.index(uselessTerm[1])
 
-    #c = document.rindex("tweetid") - 1
     c = document.index(uselessTerm[2])
-    #d = document.rindex("errorcode")
+
     d = document.index(uselessTerm[3])
-    #e = document.index("text")
+
     e = document.index(uselessTerm[4])
-    #f = document.index("timestr") - 3
+
     f = document.index(uselessTerm[5])
     # 提取用户名、tweet内容和tweetid三部分主要信息
 
