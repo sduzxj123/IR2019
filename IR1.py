@@ -4,7 +4,6 @@ from textblob import TextBlob
 from textblob import Word
 from collections import defaultdict
 import sklearn
-uselessTerm = ["username", "text", "tweetid"]
 
 postings = defaultdict(dict)
 f = open(r"C:\Users\86178\Documents\Tencent Files\2683258751\FileRecv\tweets.txt")
