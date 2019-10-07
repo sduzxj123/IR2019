@@ -266,22 +266,6 @@ def NaiveSearch(terms):
     return Answer
 
 
-def token(doc):
-    doc = doc.lower()
-
-    terms = TextBlob(doc).words.singularize()
-
-    result = []
-
-    for word in terms:
-        expected_str = Word(word)
-
-        expected_str = expected_str.lemmatize("v")
-
-        result.append(expected_str)
-
-    return result
-
 
 def tokenize_tweet(document):
     document = document.lower()
