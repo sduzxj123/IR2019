@@ -266,6 +266,22 @@ def NaiveSearch(terms):
     return Answer
 
 
+def token(doc):
+    doc = doc.lower()
+
+    terms = TextBlob(doc).words.singularize()
+
+    result = []
+
+    for word in terms:
+        expected_str = Word(word)
+
+        expected_str = expected_str.lemmatize("v")
+
+        result.append(expected_str)
+
+    return result
+
 
 def tokenize_tweet(document):
     document = document.lower()
@@ -327,9 +343,8 @@ def get_postings():
                 postings[te].append(tweetid)
             else:
                 postings[te] = [tweetid]
-    # 按字典序对postings进行升序排序,但返回的是列表，失去了键值的信息
     # postings = sorted(postings.items(),key = lambda asd:asd[0],reverse=False)
-    print(postings)
+    #print(postings)
 
 
 def search():

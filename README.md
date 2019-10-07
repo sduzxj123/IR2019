@@ -38,7 +38,7 @@ and是交集，or是并集，not是减。这就是布尔查询的思想：
 + textblob==0.15.3
 + collections
 ## 实现细节
-1.下载并观察tweets数据集的结构，用一个列表uselessTerm作为tweets数据集的分割标准：
+1.下载并观察tweets数据集的结构，用一个列表uselessTerm作为tweets数据集的分割标准，取出username，tweetid和text：
 ```sh
 {"userName": "Mariah Peoples", "clusterNo": 82, "text": "House may kill Arizona-style immigration bill, Rep. Rick Rand says: The House is unlikely to pass the \"Ari... http://tinyurl.com/4jrjcdz", "timeStr": "Sun Jan 23 00:02:37 +0000 2011", "tweetId": "28965792812892160", "errorCode": "200", "textCleaned": " ", "relevance": 2}
 ```
@@ -46,4 +46,9 @@ and是交集，or是并集，not是减。这就是布尔查询的思想：
 uselessTerm = ["username","clusterno" ,"tweetid","errorcode","text","timestr"]
 ```
 
+2.为了更加精确的对数据进行查询我们需要使用TextBlob包中的lemmatize() 方法 对单词进行词形还原，名词找单数，动词找原型。
 
+3.读入的每一行进行分词，并且删去tweeid，用一个数组存储tweeid。使用set()函数去重得到词表。
+```sh
+unique_terms = set(line1)
+```
