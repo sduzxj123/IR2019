@@ -3,7 +3,7 @@
 
 
 
-![](./report_img/image2.png)
+![](./exp&report one/report_img/image2.png)
 
 ## Inverted index
 
