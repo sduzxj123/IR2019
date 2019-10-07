@@ -436,11 +436,14 @@ def search():
         answer = NaiveSearch(terms)
 
         print("[Rank_Score: Tweetid :Text]")
-
+        ID=[]
         for (tweetid, score) in answer:
-            for line in lines:
+            ID.append(tweetid)
+
+        for line in lines:
                 line1 = tokenize_tweet(line)
-                if tweetid==line1[0]:
+                if line1[0] in ID:
+                #从n次优化到一次遍历
                  #print(line)
                  e = line.index("text") +6
                  f = line.index("timeStr") -3
