@@ -46,6 +46,4 @@ and是交集，or是并集，not是减。这就是布尔查询的思想：
 uselessTerm = ["username","clusterno" ,"tweetid","errorcode","text","timestr"]
 ```
 
-Windows:
-
 

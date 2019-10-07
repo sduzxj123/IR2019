@@ -288,7 +288,7 @@ def tokenize_tweet(document):
 
     # print(document)
 
-    terms = TextBlob(document).words.singularize()
+    terms = TextBlob(document).words.lemmatize()
 
     result = []
 
