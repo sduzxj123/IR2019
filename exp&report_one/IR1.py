@@ -10,7 +10,6 @@ f = open(r"C:\Users\86178\Documents\Tencent Files\2683258751\FileRecv\tweets.txt
 lines = f.readlines()  # 读取全部内容
 
 def merge_and(term1, term2):
-    global postings
 
     answer = []
 

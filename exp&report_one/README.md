@@ -1,7 +1,7 @@
 # IR2019
 > Homework1.1: Inverted index and Boolean Retrieval Model
 
-
+*赵鑫鉴 数据班 201700181053*
 
 ![](./report_img/image2.png)
 
@@ -54,10 +54,51 @@ unique_terms = set(line1)
 ```
 4.实现不同的Merge函数与NaiveSearch函数
 
-&emsp;Merge函数利用指针的思想可以很直观的编写出来。例如and的复杂度是O(x+y).我们对长度为x与长度为y的两个倒排索引表进行操作，不断移动下标，取出同时出现的单词。**当然“快”的那一方有时候是需要下标不变的。** 拥有两个连接词的Merge与原始Merge差别不大，稍作调整即可。
+&emsp;Merge函数利用指针的思想可以很直观的编写出来。例如and的复杂度是O(x+y).我们对长度为x与长度为y的两个倒排索引表进行操作，不断移动下标，取出同时出现的单词。**当然“快”的那一方有时候是需要下标不变的。** 拥有两个连接词的Merge与原始Merge差别不大，稍作调整即可。eg.
+```   
+def merge_and(term1, term2):
+
+    answer = []
+    
+    if (term1 not in postings) or (term2 not in postings):
+
+        return answer
+
+    else:
+
+        i = len(postings[term1])
+
+        j = len(postings[term2])
+#i，j为term1&term2倒排索引表的长度
+        x1 = 0
+
+        x2 = 0
+
+        while x1 < i and x2 < j:
+
+            if postings[term1][x1] == postings[term2][x2]:
+
+                answer.append(postings[term1][x1])
+
+                x1 += 1
+
+                x2 += 1
+
+            elif postings[term1][x1] < postings[term2][x2]:
+
+                x1 += 1
+
+            else:
+
+                x2 += 1
+
+        return answer
+ ```
 ![](./report_img/image3.png)
 
 
 ![](./report_img/image8.png)
 &emsp;在NaiveSearch里是对单个单词进行查询，提供了提供了返回具体内容不仅仅是返回id号的功能。**初始代码编写复杂度过高，对每一个求得的tweetid去数据库中查找相应的原始片段并提取文本（会乱序），后来选择将求得的tweetid存储在列表中，只需遍历一次数据库，效率大大提高，从约1min给出一条记录到一两秒的时间能得出一条记录，并且该做法不会导致乱序。**
 ![](./report_img/image1.png)
+![](./report_img/image9.png)
+
