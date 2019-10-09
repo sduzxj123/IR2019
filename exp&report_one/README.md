@@ -94,11 +94,13 @@ def merge_and(term1, term2):
 
         return answer
  ```
+ &emsp;用Merge函数实现的布尔查询结果展示：
 ![](./report_img/image3.png)
 
 
 ![](./report_img/image8.png)
 &emsp;在NaiveSearch里是对单个单词进行查询，提供了提供了返回具体内容不仅仅是返回id号的功能。**初始代码编写复杂度过高，对每一个求得的tweetid去数据库中查找相应的原始片段并提取文本（会乱序），后来选择将求得的tweetid存储在列表中，只需遍历一次数据库，效率大大提高，从约1min给出一条记录到一两秒的时间能得出一条记录，并且该做法不会导致乱序。**
 ![](./report_img/image1.png)
+&emsp;错误查询格式：
 ![](./report_img/image9.png)
 
