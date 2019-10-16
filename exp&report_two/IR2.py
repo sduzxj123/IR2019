@@ -269,6 +269,8 @@ def NaiveSearch(terms):
     return Answer
 
 Q = defaultdict(dict)
+A = defaultdict(dict)
+
 
 def RankSearch():
     str = token(input("Search query >> "))
@@ -286,23 +288,27 @@ def RankSearch():
 
         tf=1+math.log10(res)
 
-        print(df[term])
+        #print(df[term])
 
-        print(postings[term])
+        #print(postings[term])
         #对于有此词项的文档算分
         #idf单词在文档中的出现i
         #print(type(postings[term]))
 
         for te in postings[term]:
-            print(te)
+            #print(te)
             #print(type(te))
-            print(term)
+            #print(term)
 
             tweeid=te[1]
+            if A[tweeid]==1:
+                Q[tweeid] = Q[tweeid]+tf * df[term] * te[0] / cosin[te[1]]
+            else:
 
-            Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
-
-            a = sorted(Q.items(), key=lambda x: x[1], reverse=True)
+             Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+             A[tweeid]=1
+            #Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+    a = sorted(Q.items(), key=lambda x: x[1], reverse=True)
 
     print(a)
 
