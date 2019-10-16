@@ -42,32 +42,44 @@ def get_postings():
     f = open(r"C:\Users\86178\Documents\Tencent Files\2683258751\FileRecv\tweets.txt")
     lines = f.readlines()  # 读取全部内容
     for line in lines:
-        cot=cot+1
+    
         line = tokenize_tweet(line)
 #list
         tweetid = line[0]
 #提取tweetid,并从line中pop
 #求cosin，需要每个文档的长度，词频的平方
         line1=line
+        
         line1.pop(0)
+        
         #print(line)
         cosin[tweetid] = 0
+        
         for te in line1:
+        
             res=line1.count(te)
+            
             resc=res#词频
+            
             #re1=len(line1)#res=res/re1
             res=1+math.log10(res)
+            
             if te in postings.keys():
                 postings[te].append([res,tweetid])#文档中的tf
+                
                 df[te]=df[te]+1#文档中的idf
+                
                 cosin[tweetid]=cosin[tweetid]+resc * resc#文档的词频平方和
             else:
                 postings[te] = [[res,tweetid]]
+                
                 df[te]=1
+                
                 cosin[tweetid] = cosin[tweetid]+resc * resc
         #print(postings[te])
     for te in df:
             df[te]=math.log10(30548/df[te])
+            
             print(df[te])
     for tw in cosin:
         cosin[tw]=math.sqrt(cosin[tw])
@@ -85,6 +97,7 @@ def RankSearch():
     for term in str1:
         #对每个词项，算在句子中的tf和idf
         res=str.count(term)#单词出现的次数
+        
         tf=1+math.log10(res)
         #print(df[term])
         #print(postings[term])
@@ -92,15 +105,16 @@ def RankSearch():
         #idf单词在文档中的出现i
         #print(type(postings[term]))
         for te in postings[term]:
-            #print(te)
-            #print(type(te))
-            #print(term)
             tweeid=te[1]
+            
             if A[tweeid]==1:
+            
                 Q[tweeid] = Q[tweeid]+tf * df[term] * te[0] / cosin[te[1]]
             else:
              Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+             
              A[tweeid]=1
+             
     a = sorted(Q.items(), key=lambda x: x[1], reverse=True)
 
     print(a)
