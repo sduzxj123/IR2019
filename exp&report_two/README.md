@@ -32,7 +32,7 @@
 + python==3.7
 + textblob==0.15.3
 + math
-## 实现细节
+## 实现
 1.建立倒排索引表，同时计算的tf，idf & cosine normalization。与实验一不同的是postinglists中多存了一个tf。**为了运行高效，将cosine normalization用字典存储，避免了查询时产生多余计算，将时间花在预处理上在工程中应当是有效的。**。
 ```sh
 def get_postings():
