@@ -5,6 +5,8 @@ from textblob import Word
 from collections import defaultdict
 import sklearn
 import math
+import numpy
+df = defaultdict(dict)
 
 postings = defaultdict(dict)
 print(postings)
@@ -266,6 +268,47 @@ def NaiveSearch(terms):
 
     return Answer
 
+Q = defaultdict(dict)
+
+def RankSearch():
+    str = token(input("Search query >> "))
+
+    #str是一个句子
+    print(str)
+    length=len(str)
+    print(length)
+    str1=set(str)
+
+    print(str1)
+    for term in str1:
+        #对每个词项，算在句子中的tf和idf
+        res=str.count(term)#单词出现的次数
+
+        tf=1+math.log10(res)
+
+        print(df[term])
+
+        print(postings[term])
+        #对于有此词项的文档算分
+        #idf单词在文档中的出现i
+        #print(type(postings[term]))
+
+        for te in postings[term]:
+            print(te)
+            #print(type(te))
+            print(term)
+
+            tweeid=te[1]
+
+            Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+
+            a = sorted(Q.items(), key=lambda x: x[1], reverse=True)
+
+    print(a)
+
+
+
+
 
 def token(doc):
     doc = doc.lower()
@@ -320,9 +363,9 @@ def tokenize_tweet(document):
     #print(result)
     return result
 
-df = defaultdict(dict)
 cosin=dict()
-
+#Document: logarithmic tf (l as first character), no idf and cosine normalization 在某个文档中的词频，正则化，对于倒排索引表，要算词频和正则化
+# Query: logarithmic tf (l in leftmost column), idf (t in second column), no normalization 在句子中的词频，在句子中的idf
 def get_postings():
     global postings
     global df
@@ -352,17 +395,21 @@ def get_postings():
             #res=res/re1
             res=1+math.log10(res)
             if te in postings.keys():
-                postings[te].append([res,tweetid])
-                df[te]=df[te]+1
-                cosin[tweetid]=cosin[tweetid]+resc * resc
+                postings[te].append([res,tweetid])#文档中的tf
+
+                df[te]=df[te]+1#文档中的idf
+
+                cosin[tweetid]=cosin[tweetid]+resc * resc#文档的词频平方和
             else:
-                postings[te] = ([res,tweetid])
+                postings[te] = [[res,tweetid]]
+
                 df[te]=1
+
                 cosin[tweetid] = cosin[tweetid]+resc * resc
         #print(postings[te])
-    #for te in df:
-    #        df[te]=math.log10(30548/df[te])
-     #       print(df[te])
+    for te in df:
+            df[te]=math.log10(30548/df[te])
+            print(df[te])
     for tw in cosin:
         cosin[tw]=math.sqrt(cosin[tw])
     #print(cot)
@@ -479,7 +526,8 @@ def main():
     get_postings()
 
     while True:
-        search()
+        #search()
+        RankSearch()
 
 if __name__ == "__main__":
     main()
