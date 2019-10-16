@@ -33,6 +33,84 @@
 + textblob==0.15.3
 + math
 ## 实现细节
+1.建立倒排索引表，同时计算的tf，idf & cosine normalization。与实验一不同的是postinglists中多存了一个tf。**为了运行高效，将cosine normalization用字典存储，避免了查询时产生多余计算，将时间花在预处理上在工程中应当是有效的。**。
+```sh
+def get_postings():
+    global postings
+    global df
+    global cosin
+    f = open(r"C:\Users\86178\Documents\Tencent Files\2683258751\FileRecv\tweets.txt")
+    lines = f.readlines()  # 读取全部内容
+    for line in lines:
+        cot=cot+1
+        line = tokenize_tweet(line)
+#list
+        tweetid = line[0]
+#提取tweetid,并从line中pop
+#求cosin，需要每个文档的长度，词频的平方
+        line1=line
+        line1.pop(0)
+        #print(line)
+        cosin[tweetid] = 0
+        for te in line1:
+            res=line1.count(te)
+            resc=res#词频
+            #re1=len(line1)#res=res/re1
+            res=1+math.log10(res)
+            if te in postings.keys():
+                postings[te].append([res,tweetid])#文档中的tf
+                df[te]=df[te]+1#文档中的idf
+                cosin[tweetid]=cosin[tweetid]+resc * resc#文档的词频平方和
+            else:
+                postings[te] = [[res,tweetid]]
+                df[te]=1
+                cosin[tweetid] = cosin[tweetid]+resc * resc
+        #print(postings[te])
+    for te in df:
+            df[te]=math.log10(30548/df[te])
+            print(df[te])
+    for tw in cosin:
+        cosin[tw]=math.sqrt(cosin[tw])
+```
+2.本次实验添加了RankSearch函数，在其中只需要对句子进行处理即可。直接访问预处理的数据Use SMART notation: lnc.ltn进行评估并排序输出结果：
+```sh
+def RankSearch():
+    str = token(input("Search query >> "))
+    #str是一个句子
+    print(str)
+    length=len(str)
+    print(length)
+    str1=set(str)
+    print(str1)
+    for term in str1:
+        #对每个词项，算在句子中的tf和idf
+        res=str.count(term)#单词出现的次数
+        tf=1+math.log10(res)
+        #print(df[term])
+        #print(postings[term])
+        #对于有此词项的文档算分
+        #idf单词在文档中的出现i
+        #print(type(postings[term]))
+        for te in postings[term]:
+            #print(te)
+            #print(type(te))
+            #print(term)
+            tweeid=te[1]
+            if A[tweeid]==1:
+                Q[tweeid] = Q[tweeid]+tf * df[term] * te[0] / cosin[te[1]]
+            else:
+             Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+             A[tweeid]=1
+    a = sorted(Q.items(), key=lambda x: x[1], reverse=True)
+
+    print(a)
+
+```
+##结果展示：
+输出tweetid和得分的元组，按得分从高到低排序：
+![](./report_img/img7.png)
+
+
 
 
 
