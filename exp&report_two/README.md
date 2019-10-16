@@ -12,8 +12,27 @@
 ![](./report_img/img3.png)
 
 &emsp;原始的词项频率会面临这样一个严重问题，即在和查询进行相关度计算时，所有的词项都被认为是同等重要的。实际上,某些词项对于相关度计算来说几乎没有或很少有区分能力。 例如，在一个有关汽车工业的文档集中，几乎所有的文档都会包含auto，此时，auto就没有区分能力。为此，需要一种机制来降低这些出现次数过多的词项在相关性计算中的重要性。一个很直接的想法就是给文档集频率（collection frequency）较高的词项赋予较低的权重，其中文档集频率指的是词项在文档集中出现的次数。这样，便可以降低具有较高文档集频率的词项的权重。由于df本身往往较大，所以通常需要将它映射到一个较小的取值范围中去。所以在实际中我们常使用idf。
-![](./report_img/img5.png)
 ![](./report_img/img6.png)
+![](./report_img/img5.png)
+## 实验任务
+>在Homework1.1的基础上实现最基本的Ranked retrieval model 
+
+• Input：a query (like Ron Weasley birthday) 
+
+• Output: Return the top K (e.g., K = 10) relevant tweets. 
+
+• Use SMART notation: lnc.ltc 
+
+• Document: logarithmic tf (l as first character), no idf and cosine normalization 
+
+• Query: logarithmic tf (l in leftmost column), idf (t in second column), no normalization 
+
+• 改进Inverted index • 在Dictionary中存储每个term的DF • 在posting list中存储term在每个doc中的TF with pairs (docID, tf) 
+## Requirements
++ python==3.7
++ textblob==0.15.3
++ math
+## 实现细节
 
 
 
