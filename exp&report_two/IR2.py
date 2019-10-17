@@ -276,9 +276,7 @@ def RankSearch():
     str = token(input("Search query >> "))
 
     #str是一个句子
-    print(str)
     length=len(str)
-    print(length)
     str1=set(str)
 
     print(str1)
@@ -308,9 +306,14 @@ def RankSearch():
              Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
              A[tweeid]=1
             #Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
-    a = sorted(Q.items(), key=lambda x: x[1], reverse=True)
-
-    print(a)
+    ans = sorted(Q.items(), key=lambda x: x[1], reverse=True)
+    i=0
+    print("Return the top 10 relevant tweets:")
+    while i<10:
+        print(ans[i])
+        i=i+1
+    print("All relevant tweets:")
+    print(ans)
 
 
 

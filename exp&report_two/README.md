@@ -122,7 +122,10 @@ def RankSearch():
 ```
 ##结果展示：
 输出tweetid和得分的元组，按得分从高到低排序：
-![](./report_img/img7.png)
+![](./report_img/img8.png)
+![](./report_img/img9.png)
+
+
 
 
 
