@@ -3,6 +3,20 @@
 ![](./report_img/img1.png)
 
 *赵鑫鉴 数据班 201700181053*
+## 实验任务
+>在Homework1.1的基础上实现最基本的Ranked retrieval model 
+
+• Input：a query (like Ron Weasley birthday) 
+
+• Output: Return the top K (e.g., K = 10) relevant tweets. 
+
+• Use SMART notation: lnc.ltn
+
+• Document: logarithmic tf (l as first character), no idf and cosine normalization 
+
+• Query: logarithmic tf (l in leftmost column), idf (t in second column), no normalization 
+
+• 改进Inverted index • 在Dictionary中存储每个term的DF • 在posting list中存储term在每个doc中的TF with pairs (docID, tf) 
 
 &emsp;在实验一中实现了倒排索引和布尔查询处理办法，给定一个布尔查询，一篇文档要么满足查询的要求，要么不满足要求。在文档集规模很大的情况下，满足布尔查询的结果文档数量可能 非常多，往往会大大超过用户能够浏览的文档的数目。因此，对搜索引擎来说，对文档进行评 分和排序非常重要。为此，对于给定的查询，搜索引擎会计算每个匹配文档的得分。
 ![](./report_img/img2.png)
@@ -14,20 +28,7 @@
 &emsp;原始的词项频率会面临这样一个严重问题，即在和查询进行相关度计算时，所有的词项都被认为是同等重要的。实际上,某些词项对于相关度计算来说几乎没有或很少有区分能力。 例如，在一个有关汽车工业的文档集中，几乎所有的文档都会包含auto，此时，auto就没有区分能力。为此，需要一种机制来降低这些出现次数过多的词项在相关性计算中的重要性。一个很直接的想法就是给文档集频率（collection frequency）较高的词项赋予较低的权重，其中文档集频率指的是词项在文档集中出现的次数。这样，便可以降低具有较高文档集频率的词项的权重。由于df本身往往较大，所以通常需要将它映射到一个较小的取值范围中去。所以在实际中我们常使用idf。
 ![](./report_img/img6.png)
 ![](./report_img/img5.png)
-## 实验任务
->在Homework1.1的基础上实现最基本的Ranked retrieval model 
 
-• Input：a query (like Ron Weasley birthday) 
-
-• Output: Return the top K (e.g., K = 10) relevant tweets. 
-
-• Use SMART notation: lnc.ltc 
-
-• Document: logarithmic tf (l as first character), no idf and cosine normalization 
-
-• Query: logarithmic tf (l in leftmost column), idf (t in second column), no normalization 
-
-• 改进Inverted index • 在Dictionary中存储每个term的DF • 在posting list中存储term在每个doc中的TF with pairs (docID, tf) 
 ## Requirements
 + python==3.7
 + textblob==0.15.3
