@@ -88,39 +88,47 @@ def get_postings():
 ```sh
 def RankSearch():
     str = token(input("Search query >> "))
+
     #str是一个句子
-    print(str)
     length=len(str)
-    print(length)
     str1=set(str)
+
     print(str1)
     for term in str1:
         #对每个词项，算在句子中的tf和idf
         res=str.count(term)#单词出现的次数
-        
+
         tf=1+math.log10(res)
+
         #print(df[term])
         #print(postings[term])
         #对于有此词项的文档算分
         #idf单词在文档中的出现i
         #print(type(postings[term]))
         for te in postings[term]:
+            #print(te)
+            #print(type(te))
+            #print(term)
+
             tweeid=te[1]
-            
             if A[tweeid]==1:
-            
                 Q[tweeid] = Q[tweeid]+tf * df[term] * te[0] / cosin[te[1]]
             else:
              Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
              
              A[tweeid]=1
-             
-    a = sorted(Q.items(), key=lambda x: x[1], reverse=True)
-
-    print(a)
+    ans = sorted(Q.items(), key=lambda x: x[1], reverse=True)
+    i=0
+    print("Return the top 10 relevant tweets:")
+    while i<10:
+        print(ans[i])
+        i=i+1
+    print("All relevant tweets:")
+    print(ans)
 
 ```
 ##结果展示：
+
 输出tweetid和得分的元组，按得分从高到低排序：
 
 ![](./report_img/img8.png)
