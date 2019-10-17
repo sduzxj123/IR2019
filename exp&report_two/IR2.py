@@ -9,6 +9,8 @@ import numpy
 df = defaultdict(dict)
 
 postings = defaultdict(dict)
+postings1 = defaultdict(dict)
+
 print(postings)
 f = open(r"C:\Users\86178\Documents\Tencent Files\2683258751\FileRecv\tweets.txt")
 lines = f.readlines()  # 读取全部内容
@@ -274,38 +276,142 @@ A = defaultdict(dict)
 
 def RankSearch():
     str = token(input("Search query >> "))
-
+    choose=input("choose SMART Notations >> ")
     #str是一个句子
     length=len(str)
     str1=set(str)
 
     print(str1)
-    for term in str1:
+    if choose == "lnc.ltn":
+        for term in str1:
         #对每个词项，算在句子中的tf和idf
-        res=str.count(term)#单词出现的次数
-
-        tf=1+math.log10(res)
-
         #print(df[term])
-
         #print(postings[term])
         #对于有此词项的文档算分
         #idf单词在文档中的出现i
         #print(type(postings[term]))
-
-        for te in postings[term]:
+            res = str.count(term)  # 单词出现的次数
+            tf = 1 + math.log10(res)
+            for te in postings[term]:
             #print(te)
             #print(type(te))
             #print(term)
 
-            tweeid=te[1]
-            if A[tweeid]==1:
-                Q[tweeid] = Q[tweeid]+tf * df[term] * te[0] / cosin[te[1]]
-            else:
+                tweeid=te[1]
+                if A[tweeid]==1:
+                    Q[tweeid] = Q[tweeid]+tf * df[term] * te[0] / cosin[te[1]]
+                else:
 
-             Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
-             A[tweeid]=1
+                    Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+                    A[tweeid]=1
             #Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+    if choose=="lnc.btn":
+        for term in str1:
+            res = str.count(term)  # 单词出现的次数
+            tf = 1
+            for te in postings[term]:
+                # print(te)
+                # print(type(te))
+                # print(term)
+                tweeid = te[1]
+                if A[tweeid] == 1:
+                    Q[tweeid] = Q[tweeid] + tf * df[term] * te[0] / cosin[te[1]]
+                else:
+
+                    Q[tweeid] = tf * df[term] * te[0] / cosin[te[1]]
+                    A[tweeid] = 1
+                # Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+    if choose=="lnc.btn":
+        for term in str1:
+            res = str.count(term)  # 单词出现的次数
+            tf = 1
+            for te in postings[term]:
+                # print(te)
+                # print(type(te))
+                # print(term)
+                tweeid = te[1]
+                if A[tweeid] == 1:
+                    Q[tweeid] = Q[tweeid] + tf * df[term] * te[0] / cosin[te[1]]
+                    #te[0]是文档的tf
+                else:
+
+                    Q[tweeid] = tf * df[term] * te[0] / cosin[te[1]]
+                    A[tweeid] = 1
+                # Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+    if choose=="bnc.btn":
+        for term in str1:
+            res = str.count(term)  # 单词出现的次数
+            tf = 1
+            for te in postings[term]:
+                # print(te)
+                # print(type(te))
+                # print(term)
+                tweeid = te[1]
+                if A[tweeid] == 1:
+                    Q[tweeid] = Q[tweeid] + tf * df[term]  / cosin[te[1]]
+                    #te[0]是文档的tf
+                else:
+
+                    Q[tweeid] = tf * df[term] / cosin[te[1]]
+                    A[tweeid] = 1
+                # Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+    if choose == "lnc.atn":
+        MAX=0
+        for term in str1:
+            x = str.count(term)
+            MAX=max(MAX,x)
+
+        for term in str1:
+        #对每个词项，算在句子中的tf和idf
+        #print(df[term])
+        #print(postings[term])
+        #对于有此词项的文档算分
+        #idf单词在文档中的出现i
+        #print(type(postings[term]))
+            res = str.count(term)  # 单词出现的次数
+            tf = 0.5 + res*0.5/MAX
+            for te in postings[term]:
+            #print(te)
+            #print(type(te))
+            #print(term)
+
+                tweeid=te[1]
+                if A[tweeid]==1:
+                    Q[tweeid] = Q[tweeid]+tf * df[term] * te[0] / cosin[te[1]]
+                else:
+
+                    Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+                    A[tweeid]=1
+            #Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+    if choose == "anc.atn":
+        MAX=0
+        for term in str1:
+            x = str.count(term)
+            MAX=max(MAX,x)
+
+        for term in str1:
+        #对每个词项，算在句子中的tf和idf
+        #print(df[term])
+        #print(postings[term])
+        #对于有此词项的文档算分
+        #idf单词在文档中的出现i
+        #print(type(postings[term]))
+            res = str.count(term)  # 单词出现的次数
+            tf = 0.5 + res*0.5/MAX
+            for te in postings1[term]:
+            #print(te)
+            #print(type(te))
+            #print(term)
+
+                tweeid=te[1]
+                if A[tweeid]==1:
+                    Q[tweeid] = Q[tweeid]+tf * df[term] * te[0] / cosin[te[1]]
+                else:
+
+                    Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+                    A[tweeid]=1
+            #Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+
     ans = sorted(Q.items(), key=lambda x: x[1], reverse=True)
     i=0
     print("Return the top 10 relevant tweets:")
@@ -397,20 +503,30 @@ def get_postings():
         #for te in unique_terms:
         #no_use = 0
         cosin[tweetid] = 0
+        MAX = 0
+        for te in line:
+            x = line.count(te)
+            MAX = max(MAX, x)
         for te in line1:
             res=line1.count(te)
             resc=res#词频
             #re1=len(line1)
             #res=res/re1
             res=1+math.log10(res)
+            res1=line1.count(te)
+            res1=0.5+0.5*res1/MAX
             if te in postings.keys():
                 postings[te].append([res,tweetid])#文档中的tf
+
+                postings1[te].append([res1, tweetid])  #文档中的atf
 
                 df[te]=df[te]+1#文档中的idf
 
                 cosin[tweetid]=cosin[tweetid]+resc * resc#文档的词频平方和
             else:
                 postings[te] = [[res,tweetid]]
+
+                postings1[te]=[[res1, tweetid]]
 
                 df[te]=1
 
