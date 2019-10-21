@@ -124,6 +124,8 @@ def RankSearch():
                     Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
                     A[tweeid]=1
 .............................................
+
+
   ans = sorted(Q.items(), key=lambda x: x[1], reverse=True)
     i=0
     print("Return the top 10 relevant tweets:")
@@ -136,7 +138,7 @@ def RankSearch():
 ```
 ##结果展示：
 
-在不同SMART notation输出tweetid和得分的元组，按得分从高到低排序，返回top 10的结果。同时支持返回所有结果：
+在不同SMART notation输出tweetid和得分的元组，按得分从高到低排序，返回top 10的结果。同时支持返回所有结果。我们可以看到在不同评价指标下top10结果虽然不同，但是相似性还是比较高的：
 
 ![](./report_img/img7.png)
 ![](./report_img/img8.png)
