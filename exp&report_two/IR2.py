@@ -321,23 +321,7 @@ def RankSearch():
                     Q[tweeid] = tf * df[term] * te[0] / cosin[te[1]]
                     A[tweeid] = 1
                 # Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
-    if choose=="lnc.btn":
-        for term in str1:
-            res = str.count(term)  # 单词出现的次数
-            tf = 1
-            for te in postings[term]:
-                # print(te)
-                # print(type(te))
-                # print(term)
-                tweeid = te[1]
-                if A[tweeid] == 1:
-                    Q[tweeid] = Q[tweeid] + tf * df[term] * te[0] / cosin[te[1]]
-                    #te[0]是文档的tf
-                else:
 
-                    Q[tweeid] = tf * df[term] * te[0] / cosin[te[1]]
-                    A[tweeid] = 1
-                # Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
     if choose=="bnc.btn":
         for term in str1:
             res = str.count(term)  # 单词出现的次数

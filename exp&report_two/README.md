@@ -16,7 +16,9 @@
 
 • Query: logarithmic tf (l in leftmost column), idf (t in second column), no normalization 
 
-• 改进Inverted index • 在Dictionary中存储每个term的DF • 在posting list中存储term在每个doc中的TF with pairs (docID, tf) 
+• 改进Inverted index，在Dictionary中存储每个term的DF，在posting list中存储term在每个doc中的TF with pairs (docID, tf) 
+
+**本实验中额外实现了lnc.btn / bnc.btn/ lnc.atn / anc.atn**
 
 &emsp;在实验一中实现了倒排索引和布尔查询处理办法，给定一个布尔查询，一篇文档要么满足查询的要求，要么不满足要求。在文档集规模很大的情况下，满足布尔查询的结果文档数量可能 非常多，往往会大大超过用户能够浏览的文档的数目。因此，对搜索引擎来说，对文档进行评 分和排序非常重要。为此，对于给定的查询，搜索引擎会计算每个匹配文档的得分。
 ![](./report_img/img2.png)
@@ -34,7 +36,7 @@
 + textblob==0.15.3
 + math
 ## 实现
-1.建立倒排索引表，同时计算的tf，idf & cosine normalization。与实验一不同的是postinglists中多存了一个tf。**为了运行高效，将cosine normalization用字典存储，避免了查询时产生多余计算，将时间花在预处理上在工程中应当是有效的。**。
+1.建立倒排索引表，同时计算两种tf（L和a），idf & cosine normalization。与实验一不同的是postinglists中多存了一个tf。**为了运行高效，将cosine normalization用字典存储，避免了查询时产生多余计算，将时间花在预处理上在工程中应当是有效的。**
 ```sh
 def get_postings():
     global postings
@@ -42,40 +44,46 @@ def get_postings():
     global cosin
     f = open(r"C:\Users\86178\Documents\Tencent Files\2683258751\FileRecv\tweets.txt")
     lines = f.readlines()  # 读取全部内容
+    cot=0
     for line in lines:
-    
+        cot=cot+1
         line = tokenize_tweet(line)
 #list
         tweetid = line[0]
 #提取tweetid,并从line中pop
 #求cosin，需要每个文档的长度，词频的平方
         line1=line
-        
         line1.pop(0)
-        
-        #print(line)
         cosin[tweetid] = 0
-        
+        MAX = 0
+        for te in line:
+            x = line.count(te)
+            
+            MAX = max(MAX, x)
         for te in line1:
-        
             res=line1.count(te)
             
             resc=res#词频
-            
-            #re1=len(line1)#res=res/re1
             res=1+math.log10(res)
             
+            res1=line1.count(te)
+            
+            res1=0.5+0.5*res1/MAX
             if te in postings.keys():
                 postings[te].append([res,tweetid])#文档中的tf
-                
+
+                postings1[te].append([res1, tweetid])  #文档中的atf
+
                 df[te]=df[te]+1#文档中的idf
-                
+
                 cosin[tweetid]=cosin[tweetid]+resc * resc#文档的词频平方和
             else:
                 postings[te] = [[res,tweetid]]
-                
+
+                postings1[te]=[[res1, tweetid]]
+
                 df[te]=1
-                
+
                 cosin[tweetid] = cosin[tweetid]+resc * resc
         #print(postings[te])
     for te in df:
@@ -85,40 +93,38 @@ def get_postings():
     for tw in cosin:
         cosin[tw]=math.sqrt(cosin[tw])
 ```
-2.本次实验添加了RankSearch函数，在其中只需要对句子进行处理即可。直接访问预处理的数据Use SMART notation: lnc.ltn进行评估并排序输出结果：
+2.本次实验添加了RankSearch函数，在其中只需要对句子进行处理即可。直接访问预处理的数据Use SMART notation: lnc.ltn / lnc.btn / bnc.btn / lnc.atn / anc.atn进行评估并排序输出结果：
 ```sh
 def RankSearch():
     str = token(input("Search query >> "))
-
+    choose=input("choose SMART Notations >> ")
     #str是一个句子
     length=len(str)
     str1=set(str)
 
     print(str1)
-    for term in str1:
+    if choose == "lnc.ltn":
+        for term in str1:
         #对每个词项，算在句子中的tf和idf
-        res=str.count(term)#单词出现的次数
-
-        tf=1+math.log10(res)
-
         #print(df[term])
         #print(postings[term])
         #对于有此词项的文档算分
         #idf单词在文档中的出现i
         #print(type(postings[term]))
-        for te in postings[term]:
+            res = str.count(term)  # 单词出现的次数
+            tf = 1 + math.log10(res)
+            for te in postings[term]:
             #print(te)
             #print(type(te))
             #print(term)
-
-            tweeid=te[1]
-            if A[tweeid]==1:
-                Q[tweeid] = Q[tweeid]+tf * df[term] * te[0] / cosin[te[1]]
-            else:
-             Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
-             
-             A[tweeid]=1
-    ans = sorted(Q.items(), key=lambda x: x[1], reverse=True)
+                tweeid=te[1]
+                if A[tweeid]==1:
+                    Q[tweeid] = Q[tweeid]+tf * df[term] * te[0] / cosin[te[1]]
+                else:
+                    Q[tweeid]=tf*df[term]*te[0]/cosin[te[1]]
+                    A[tweeid]=1
+.............................................
+  ans = sorted(Q.items(), key=lambda x: x[1], reverse=True)
     i=0
     print("Return the top 10 relevant tweets:")
     while i<10:
@@ -130,10 +136,15 @@ def RankSearch():
 ```
 ##结果展示：
 
-输出tweetid和得分的元组，按得分从高到低排序：
+在不同SMART notation输出tweetid和得分的元组，按得分从高到低排序，返回top 10的结果。同时支持返回所有结果：
 
+![](./report_img/img7.png)
 ![](./report_img/img8.png)
 ![](./report_img/img9.png)
+![](./report_img/img10.png)
+![](./report_img/img11.png)
+![](./report_img/img12.png)
+
 
 
 
