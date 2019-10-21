@@ -136,6 +136,7 @@ def RankSearch():
     print(ans)
 
 ```
+
 ##结果展示：
 
 在不同SMART notation输出tweetid和得分的元组，按得分从高到低排序，返回top 10的结果。同时支持返回所有结果。我们可以看到在不同评价指标下top10结果虽然不同，但是相似性还是比较高的：
