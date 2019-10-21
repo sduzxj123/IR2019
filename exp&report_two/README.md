@@ -18,7 +18,7 @@
 
 • 改进Inverted index，在Dictionary中存储每个term的DF，在posting list中存储term在每个doc中的TF with pairs (docID, tf) 
 
-**本实验中额外实现了lnc.btn / bnc.btn/ lnc.atn / anc.atn**
+***本实验中额外实现了lnc.btn / bnc.btn/ lnc.atn / anc.atn***
 
 &emsp;在实验一中实现了倒排索引和布尔查询处理办法，给定一个布尔查询，一篇文档要么满足查询的要求，要么不满足要求。在文档集规模很大的情况下，满足布尔查询的结果文档数量可能 非常多，往往会大大超过用户能够浏览的文档的数目。因此，对搜索引擎来说，对文档进行评 分和排序非常重要。为此，对于给定的查询，搜索引擎会计算每个匹配文档的得分。
 ![](./report_img/img2.png)
