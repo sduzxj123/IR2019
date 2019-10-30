@@ -10,12 +10,21 @@
 • Mean Reciprocal Rank (MRR) 
 
 • Normalized Discounted Cumulative Gain (NDCG)
+
+## Mean Average Precision
+mean average precision (mAP) of a set of queries is defined as such:
+![](./report_img/im7.png)
+其中Q是集合中查询的数量，AveP（q）是给定查询q的平均精度（AP）。
+
+
+
 ## Requirements
 + python==3.7
 + textblob==0.15.3
 + collections
-+ 运行此项目您需要使用此文件：https://trec.nist.gov/data/microblog/2014/qrels 2014.txt
++ **运行此项目您还需要下载此文件：https://trec.nist.gov/data/microblog/2014/qrels 2014.txt**
 
+## 运行结果
 
 ![](./report_img/im1.png)
 ![](./report_img/im2.png)
