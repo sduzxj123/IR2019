@@ -14,7 +14,11 @@
 ## Mean Average Precision
 mean average precision (mAP) of a set of queries is defined as such:
 ![](./report_img/im7.png)
-其中Q是集合中查询的数量，AveP（q）是给定查询q的平均精度（AP）。
+其中Q是集合中查询的数量，AveP(q)是给定查询q的平均精度（AP）：
+![](./report_img/im8.png)
+
+
+
 
 
 
