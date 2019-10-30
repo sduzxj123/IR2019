@@ -14,6 +14,7 @@
 mean average precision (mAP) of a set of queries is defined as such:
 ![](./report_img/im7.png)
 其中Q是集合中查询的数量，AveP(q)是给定查询q的平均精度（AP）：
+
 ![](./report_img/im8.png)
 
 &emsp;平均准确率是每篇相关文档检索出后的准确率的平均值。主集合的平均准确率(MAP)是每个主题的平均准确率的平均值。MAP 是反映系统在全部相关文档上性能的单值指标。系统检索出来的相关文档越靠前(rank 越高)，MAP就可能越高。如果系统没有返回相关文档，则准确率默认为0。
