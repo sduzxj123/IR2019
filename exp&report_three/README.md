@@ -39,8 +39,8 @@ mean average precision (mAP) of a set of queries is defined as such:
 + python==3.7
 + textblob==0.15.3
 + collections
-+ **运行此项目您还需要下载此文件：https://trec.nist.gov/data/microblog/2014/qrels2014.txt**
-
++ **运行此项目您必须要使用此文件：https://trec.nist.gov/data/microblog/2014/qrels2014.txt**
++ 更换数据集时只需手工更换文本文件
 ## 运行结果
 
 ![](./report_img/im1.png)
