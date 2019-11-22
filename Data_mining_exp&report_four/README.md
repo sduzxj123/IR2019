@@ -45,14 +45,34 @@ labels = digits.target
 在sklearn内置的数据集中评测不同聚类算法的聚类效果，使用以下三种评价指标和算法时间复杂度评测聚类效果：
 ![](./imgset/im12.png)
 
+##实验结果部分可视化展示：
+meanshift：
+
 ![](./imgset/img2.png)
+kmeans++
+
 ![](./imgset/img3.png)
+AffinityPropagation：
+
 ![](./imgset/img4.png)
 ![](./imgset/img5.png)
+![](./imgset/img13.png)
+DBSCAN：DBSCAN的聚类定义很简单：由密度可达关系导出的最大密度相连的样本集合，即为我们最终聚类的一个类别，或者说一个簇。
+
+这个DBSCAN的簇里面可以有一个或者多个核心对象。如果只有一个核心对象，则簇里其他的非核心对象样本都在这个核心对象的ϵ-邻域里；如果有多个核心对象，则簇里的任意一个核心对象的ϵ-邻域中一定有一个其他的核心对象，否则这两个核心对象无法密度可达。这些核心对象的ϵ-邻域里所有的样本的集合组成的一个DBSCAN聚类簇。
+![](./imgset/img14.png)
+下面展示不同参数（半径）下的聚类情况
+
+DBSCAN 0.3：
+
 ![](./imgset/img7.png)
 ![](./imgset/img6.png)
+DBSCAN 0.33：
+
 ![](./imgset/img9.png)
 ![](./imgset/img8.png)
+DBSCAN 0.4：
+
 ![](./imgset/img11.png)
 ![](./imgset/img10.png)
 

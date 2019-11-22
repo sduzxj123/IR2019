@@ -100,7 +100,7 @@ af = AffinityPropagation(preference=-50).fit(reduced_data)
 cluster_centers_indices = af.cluster_centers_indices_
 labels = af.labels_
 
-n_clusters_ = 15
+n_clusters_ = 30
 plt.close('all')
 plt.figure(3)
 plt.clf()
