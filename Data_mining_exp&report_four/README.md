@@ -1,4 +1,6 @@
+![](./imgset/img1.png)
 # Data mining
+
 数据班 赵鑫鉴  201700181053
 ## Requirements
 + python==3.7.4
@@ -17,3 +19,4 @@ pip install --upgrade scikit-learn
 conda update scikit-learn
 pip install -U sklearn
 ```
+
