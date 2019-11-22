@@ -22,6 +22,20 @@ pip install -U sklearn
 ![](./imgset/img2.png)
 ![](./imgset/img3.png)
 ![](./imgset/img4.png)
+![](./imgset/img5.png)
+![](./imgset/img7.png)
+![](./imgset/img6.png)
+![](./imgset/img9.png)
+![](./imgset/img8.png)
+![](./imgset/img11.png)
+![](./imgset/img10.png)
+
+
+
+
+
+
+
 
 
 
