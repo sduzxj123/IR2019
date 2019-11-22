@@ -75,6 +75,10 @@ DBSCAN 0.4：
 
 ![](./imgset/img11.png)
 ![](./imgset/img10.png)
+20newsgroups数据集:
+![](./imgset/img16.png)
+![](./imgset/img17.png)
+
 
 
 
