@@ -20,7 +20,7 @@ conda update scikit-learn
 pip install -U sklearn
 ```
 ##Dataset：
-本次作业中使用两个sklearn内置的数据集：
+本次任务使用两个sklearn内置的数据集：
 
 1.20newsgroups：
 
@@ -41,14 +41,20 @@ labels = digits.target
 ```
 
 
-##实验要求：
-在sklearn内置的数据集中评测不同聚类算法的聚类效果，使用以下三种评价指标和算法时间复杂度评测聚类效果：
-![](./imgset/im12.png)
+##任务要求：
+在sklearn内置的数据集中评测不同聚类算法的聚类效果，使用三种评价指标和算法时间复杂度评测聚类效果：
+##Evaluation：
++ Normalized Mutual Information (NMI)
++ Homogeneity: each cluster contains only members of a single class
++ Completeness: all members of a given class are assigned to the same cluster
+
 
 ##实验结果部分可视化展示：
-meanshift：
-
 ![](./imgset/img2.png)
+
+meanshift：
+![](./imgset/img18.png)
+
 kmeans++
 
 ![](./imgset/img3.png)
