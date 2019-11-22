@@ -5,11 +5,11 @@
 >数据班 赵鑫鉴  201700181053
 ## Requirements
 + python==3.7.4
-+ textblob==0.15.3
-+ scikit-learn ==0.21.3（0.20.3以下版本可能会报错）
++ **scikit-learn ==0.21.3（0.20.3以下版本可能会报错）**
 + NumPy (>= 1.11.0)
 + SciPy (>= 0.17.0)
 + joblib (>= 0.11)
+
 &emsp;运行此代码需要安装sklearn，可以参考以下几种下载或者更新方式：
 ```
 使用清华镜像下载：
@@ -40,48 +40,56 @@ n_digits = len(np.unique(digits.target))
 labels = digits.target
 ```
 
-
 ##任务要求：
 在sklearn内置的数据集中评测不同聚类算法的聚类效果，使用三种评价指标和算法时间复杂度评测聚类效果：
-##Evaluation：
+## Evaluation：
 + Normalized Mutual Information (NMI)
 + Homogeneity: each cluster contains only members of a single class
 + Completeness: all members of a given class are assigned to the same cluster
 
 
-##实验结果部分可视化展示：
+## 实验结果部分可视化展示：
 ![](./imgset/img2.png)
 
 meanshift：
+
 ![](./imgset/img18.png)
 
 kmeans++
 
 ![](./imgset/img3.png)
+
 AffinityPropagation：
 
 ![](./imgset/img4.png)
 ![](./imgset/img5.png)
 ![](./imgset/img13.png)
+
 DBSCAN：DBSCAN的聚类定义很简单：由密度可达关系导出的最大密度相连的样本集合，即为我们最终聚类的一个类别，或者说一个簇。
 
 这个DBSCAN的簇里面可以有一个或者多个核心对象。如果只有一个核心对象，则簇里其他的非核心对象样本都在这个核心对象的ϵ-邻域里；如果有多个核心对象，则簇里的任意一个核心对象的ϵ-邻域中一定有一个其他的核心对象，否则这两个核心对象无法密度可达。这些核心对象的ϵ-邻域里所有的样本的集合组成的一个DBSCAN聚类簇。
+
 ![](./imgset/img14.png)
+
 下面展示不同参数（半径）下的聚类情况
 
 DBSCAN 0.3：
 
 ![](./imgset/img7.png)
 ![](./imgset/img6.png)
+
 DBSCAN 0.33：
 
 ![](./imgset/img9.png)
 ![](./imgset/img8.png)
+
 DBSCAN 0.4：
 
 ![](./imgset/img11.png)
 ![](./imgset/img10.png)
+
 20newsgroups数据集:
+
 ![](./imgset/img16.png)
 ![](./imgset/img17.png)
 
