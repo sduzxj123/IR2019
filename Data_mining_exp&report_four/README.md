@@ -19,4 +19,9 @@ pip install --upgrade scikit-learn
 conda update scikit-learn
 pip install -U sklearn
 ```
+![](./imgset/img2.png)
+![](./imgset/img3.png)
+![](./imgset/img4.png)
+
+
 
